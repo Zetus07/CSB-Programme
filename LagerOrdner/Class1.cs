@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -10,11 +10,12 @@ namespace Bombo
     internal class Class1
     {
 
-        public static void  Main(string[] args)
+        public static void Main(string[] args)
         {
-            DVD();
+            
         }
 
+        /*
         public static void DVD()
         {
             int x = 1;
@@ -25,7 +26,7 @@ namespace Bombo
             int maxY = Console.WindowHeight;
             char[] trailSymb = { '#', 'o', 'o', '.', '.', '.' };
             List<(int x, int y)> trailcords = new List<(int x, int y)>();
-            
+
             Console.CursorVisible = false;
 
 
@@ -50,7 +51,7 @@ namespace Bombo
                 trailcords.Add((x, y)); // Koordinaten werden gespeichert
 
 
-                int traillength = trailcords.Count()-1; // wie viele Koordinaten
+                int traillength = trailcords.Count() - 1; // wie viele Koordinaten
 
                 if (traillength >= 5)        // mehr als 6 Kords?
                 {
@@ -69,6 +70,11 @@ namespace Bombo
                             Console.SetCursorPosition(trailcords[j].x, trailcords[j].y);
                             Console.Write(trailSymb[j]);
                             j++;
+                            if (j > 5)
+                            {
+                                j = 0;
+                            }
+
                             Thread.Sleep(50);
                         }
                         else
@@ -85,7 +91,7 @@ namespace Bombo
 
 
 
-                
+
 
 
 
@@ -94,6 +100,63 @@ namespace Bombo
 
         }
 
+
+        */
+        public static void DVD2()
+        {
+            int x = 1;
+            int y = 1;
+            int dx = 1;
+            int dy = 1;
+            int maxX = Console.WindowWidth;
+            int maxY = Console.WindowHeight;
+            char[] trailicons = { 'O', '.' };
+            List<(int x, int y)> trailcords = new List<(int x, int y)>();
+
+            Console.CursorVisible = false;
+
+            /* 1. Koordinaten,maxKoordinaten, Liste mit Symbolen, Liste mit Koordinaten
+             * 2. Kopf ausgeben und Koordinaten speichern, dann 1 weiter
+             * 3. Schwanz ausgeben an der Koordinate vorher vom Kopf
+             * 4. 
+             * 
+             */
+            while (true)
+            { 
+                if (x <= 0 || x >= maxX - 1) // richtungswechsel x
+                {
+                    dx = dx * -1;
+                }
+                if (y <= 0 || y >= maxY - 1) // richtungswechsel y
+                {
+                    dy = dy * -1;
+                }
+                x = x + dx;
+                y = y + dy;
+
+                trailcords.Add((x, y));
+
+
+                Console.SetCursorPosition(x, y);
+                Console.Write(trailicons[0]);
+
+
+
+
+                for (int i = 0; i< trailcords.Count; i++)
+                {
+                    
+                    Console.SetCursorPosition(trailcords[i-1].x, trailcords[i-1].y);
+                    Console.Write(trailicons[i]);
+                }
+            }
+
+
+            
+
+
+
+        }
     }
 
 }
